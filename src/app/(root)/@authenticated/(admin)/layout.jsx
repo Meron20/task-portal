@@ -1,0 +1,30 @@
+'use client'
+
+import React, { useEffect } from 'react'
+import { useAuth } from '../../../../context/authContext'
+import { useRouter } from 'next/navigation'
+
+
+function AdminLayout( { children }) {
+
+   const { isAdmin } = useAuth()
+   const router = useRouter()
+
+  
+   useEffect(() => {
+    if(!isAdmin()) {
+        router.replace("/")
+
+    }
+   }, [])
+   
+     if(!isAdmin()) {
+        return null
+     }
+
+  return (
+    <>{ children }</>
+  )
+}
+
+export default AdminLayout
